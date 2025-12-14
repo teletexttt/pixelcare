@@ -1,4 +1,6 @@
-// Configuración principal
+// ===========================================
+// CONFIGURACIÓN TELETEXT EXACTA
+// ===========================================
 const CONFIG = {
     baseWidth: 640,
     baseHeight: 400,
@@ -10,20 +12,22 @@ const CONFIG = {
     currentScale: 1
 };
 
-// Estado global
+// ===========================================
+// PALETA TELETEXT - 8 COLORES EXACTOS
+// ===========================================
 const state = {
     tool: 'brush',
-    fgColor: 7, // Blanco
-    bgColor: 0, // Negro
+    fgColor: 7, // Blanco por defecto
+    bgColor: 0, // Negro por defecto
     colors: [
-        { name: 'black', hex: '#000000', display: 'Negro' },
-        { name: 'red', hex: '#ff3b30', display: 'Rojo' },
-        { name: 'green', hex: '#4cd964', display: 'Verde' },
-        { name: 'yellow', hex: '#ffcc00', display: 'Amarillo' },
-        { name: 'blue', hex: '#007aff', display: 'Azul' },
-        { name: 'magenta', hex: '#ff2d55', display: 'Magenta' },
-        { name: 'cyan', hex: '#5ac8fa', display: 'Cian' },
-        { name: 'white', hex: '#ffffff', display: 'Blanco' }
+        { name: 'black', hex: '#000000', display: 'NEGRO', symbol: '0' },
+        { name: 'red', hex: '#ff0000', display: 'ROJO', symbol: '1' },
+        { name: 'green', hex: '#00ff00', display: 'VERDE', symbol: '2' },
+        { name: 'yellow', hex: '#ffff00', display: 'AMARILLO', symbol: '3' },
+        { name: 'blue', hex: '#0000ff', display: 'AZUL', symbol: '4' },
+        { name: 'magenta', hex: '#ff00ff', display: 'MAGENTA', symbol: '5' },
+        { name: 'cyan', hex: '#00ffff', display: 'CIAN', symbol: '6' },
+        { name: 'white', hex: '#ffffff', display: 'BLANCO', symbol: '7' }
     ],
     isDrawing: false,
     lastX: 0,
@@ -42,6 +46,120 @@ const state = {
     isPanning: false
 };
 
+// ===========================================
+// ICONOS DE SUSAN KARE (32×32 píxeles originales)
+// ===========================================
+const KARE_ICONS = {
+    smiley: [
+        [0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0],
+        [0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,0],
+        [0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0],
+        [0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0],
+        [0,1,0,0,1,0,0,0,0,1,0,0,1,0,0,0],
+        [1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0],
+        [1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0],
+        [1,0,0,1,0,0,0,0,0,0,1,0,0,1,0,0],
+        [1,0,0,0,1,1,0,0,1,1,0,0,0,1,0,0],
+        [0,1,0,0,0,0,1,1,0,0,0,0,1,0,0,0],
+        [0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0],
+        [0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0],
+        [0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,0],
+        [0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    ],
+    hand: [
+        [0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0],
+        [0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0],
+        [0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0],
+        [0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0],
+        [0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0],
+        [0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0],
+        [0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0],
+        [0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0],
+        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    ],
+    watch: [
+        [0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0],
+        [0,0,1,1,0,0,0,0,0,0,0,0,1,1,0,0],
+        [0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0],
+        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0],
+        [0,0,1,1,0,0,0,0,0,0,0,0,1,1,0,0],
+        [0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    ],
+    trash: [
+        [0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0],
+        [0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0],
+        [0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0],
+        [0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0],
+        [0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+        [0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0],
+        [0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0]
+    ],
+    folder: [
+        [0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0],
+        [0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0],
+        [0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0],
+        [0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0],
+        [0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0],
+        [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0]
+    ],
+    paint: [
+        [0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0],
+        [0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0],
+        [0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0],
+        [0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0],
+        [0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0],
+        [0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+        [0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0],
+        [0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0],
+        [0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0],
+        [0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0],
+        [0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0],
+        [0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0]
+    ]
+};
+
 // Elementos DOM
 const canvas = document.getElementById('main-canvas');
 const ctx = canvas.getContext('2d');
@@ -58,41 +176,9 @@ const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const mobileToolbar = document.getElementById('mobile-toolbar');
 const logoCanvas = document.getElementById('logo-canvas');
 
-// Iconos de Susan Kare
-const KARE_ICONS = {
-    smiley: [
-        [0,0,1,1,1,1,0,0],
-        [0,1,0,0,0,0,1,0],
-        [1,0,1,0,0,1,0,1],
-        [1,0,0,0,0,0,0,1],
-        [1,0,1,0,0,1,0,1],
-        [1,0,0,1,1,0,0,1],
-        [0,1,0,0,0,0,1,0],
-        [0,0,1,1,1,1,0,0]
-    ],
-    hand: [
-        [0,0,0,0,1,1,0,0],
-        [0,0,0,1,0,0,1,0],
-        [0,0,1,0,0,0,0,1],
-        [0,0,1,0,0,0,0,1],
-        [0,1,0,0,0,0,0,1],
-        [0,1,0,0,0,0,0,1],
-        [1,0,0,0,0,0,0,1],
-        [1,1,1,1,1,1,1,1]
-    ],
-    watch: [
-        [0,0,1,1,1,1,0,0],
-        [0,1,0,0,0,0,1,0],
-        [1,0,0,0,0,0,0,1],
-        [1,0,0,0,0,0,0,1],
-        [1,0,0,0,0,0,0,1],
-        [1,0,0,0,0,0,0,1],
-        [0,1,0,0,0,0,1,0],
-        [0,0,1,1,1,1,0,0]
-    ]
-};
-
-// Inicialización
+// ===========================================
+// INICIALIZACIÓN
+// ===========================================
 function init() {
     detectMobile();
     setupCanvas();
@@ -100,6 +186,7 @@ function init() {
     setupEventListeners();
     setupPalette();
     setupMobileUI();
+    setupKareIcons();
     createLogo();
     updateDisplay();
     startBlinkEffect();
@@ -107,7 +194,7 @@ function init() {
     
     setInterval(updateTime, 60000);
     
-    showMessage('PIXELCARE - HOMENAJE A SUSAN KARE. CREA ICONOS PÍXEL PERFECT.');
+    showMessage('■ PIXELKARE TELETEXT PAINT ■ HOMENAJE A SUSAN KARE ■');
     
     saveToHistory();
 }
@@ -120,7 +207,6 @@ function detectMobile() {
         mobileHint.style.display = 'block';
         responsiveToggle.style.display = 'inline-block';
         
-        // Ajustar tamaño para móvil
         CONFIG.gridSize = 14;
         CONFIG.cols = 28;
         CONFIG.rows = 20;
@@ -129,7 +215,6 @@ function detectMobile() {
         mobileHint.style.display = 'none';
         responsiveToggle.style.display = 'none';
         
-        // Tamaño original para desktop
         CONFIG.gridSize = 16;
         CONFIG.cols = 40;
         CONFIG.rows = 25;
@@ -184,21 +269,52 @@ function setupTempCanvas() {
 function createLogo() {
     const logoCtx = logoCanvas.getContext('2d');
     logoCtx.fillStyle = '#000';
-    logoCtx.fillRect(0, 0, 48, 48);
+    logoCtx.fillRect(0, 0, 64, 64);
     
-    // Dibujar smiley pixelado
-    logoCtx.fillStyle = '#ffff00';
+    // Logo estilo Susan Kare: Cara pixelada
+    logoCtx.fillStyle = '#ffff00'; // Amarillo Teletext
+    
+    // Cara básica (8x8 pixels escalados)
+    const face = [
+        [0,0,1,1,1,1,0,0],
+        [0,1,0,0,0,0,1,0],
+        [1,0,1,0,0,1,0,1],
+        [1,0,0,0,0,0,0,1],
+        [1,0,1,0,0,1,0,1],
+        [1,0,0,1,1,0,0,1],
+        [0,1,0,0,0,0,1,0],
+        [0,0,1,1,1,1,0,0]
+    ];
+    
     for (let y = 0; y < 8; y++) {
         for (let x = 0; x < 8; x++) {
-            if (KARE_ICONS.smiley[y][x] === 1) {
-                logoCtx.fillRect(x * 6, y * 6, 6, 6);
+            if (face[y][x] === 1) {
+                logoCtx.fillRect(x * 8, y * 8, 8, 8);
+            }
+        }
+    }
+    
+    // Texto "KARE" en pixel art
+    logoCtx.fillStyle = '#00ffff'; // Cian
+    const kareText = [
+        [1,0,0,1,0,0,1,0],
+        [1,0,1,0,0,1,0,0],
+        [1,1,0,0,1,0,0,0],
+        [1,0,1,0,0,1,0,0],
+        [1,0,0,1,0,0,1,0]
+    ];
+    
+    for (let y = 0; y < 5; y++) {
+        for (let x = 0; x < 8; x++) {
+            if (kareText[y][x] === 1) {
+                logoCtx.fillRect((x + 4) * 8, (y + 10) * 4, 4, 4);
             }
         }
     }
 }
 
 function drawGrid() {
-    ctx.strokeStyle = 'rgba(128, 216, 255, 0.3)';
+    ctx.strokeStyle = '#00ffff'; // Cian Teletext
     ctx.lineWidth = 1;
     
     for (let x = 0; x <= CONFIG.cols; x++) {
@@ -258,27 +374,27 @@ function setupPalette() {
     bgColors.innerHTML = '';
     
     state.colors.forEach((color, index) => {
-        // Botones para color frontal
+        // Color frontal
         const fgBtn = document.createElement('button');
-        fgBtn.className = `color-btn color-${color.name}`;
-        fgBtn.title = color.display;
+        fgBtn.className = `teletext-color-btn color-${color.name}`;
+        fgBtn.title = `${color.display} (${color.symbol})`;
         fgBtn.dataset.index = index;
         fgBtn.addEventListener('click', () => {
             state.fgColor = index;
             updatePaletteDisplay();
-            showMessage(`COLOR FRENTE: ${color.display}`);
+            showMessage(`■ COLOR FRENTE: ${color.display} (${color.symbol})`);
         });
         fgColors.appendChild(fgBtn);
         
-        // Botones para color de fondo
+        // Color fondo
         const bgBtn = document.createElement('button');
-        bgBtn.className = `color-btn color-${color.name}`;
-        bgBtn.title = color.display;
+        bgBtn.className = `teletext-color-btn color-${color.name}`;
+        bgBtn.title = `${color.display} (${color.symbol})`;
         bgBtn.dataset.index = index;
         bgBtn.addEventListener('click', () => {
             state.bgColor = index;
             updatePaletteDisplay();
-            showMessage(`COLOR FONDO: ${color.display}`);
+            showMessage(`■ COLOR FONDO: ${color.display} (${color.symbol})`);
         });
         bgColors.appendChild(bgBtn);
     });
@@ -292,22 +408,62 @@ function updatePaletteDisplay() {
     const fgColorName = document.getElementById('fg-color-name');
     const bgColorName = document.getElementById('bg-color-name');
     
-    currentFg.className = `color-box color-${state.colors[state.fgColor].name}`;
-    currentBg.className = `color-box color-${state.colors[state.bgColor].name}`;
+    currentFg.className = `teletext-color-box color-${state.colors[state.fgColor].name}`;
+    currentBg.className = `teletext-color-box color-${state.colors[state.bgColor].name}`;
     fgColorName.textContent = state.colors[state.fgColor].display;
     bgColorName.textContent = state.colors[state.bgColor].display;
     
-    document.querySelectorAll('#fg-colors .color-btn').forEach(btn => {
+    document.querySelectorAll('#fg-colors .teletext-color-btn').forEach(btn => {
         btn.classList.toggle('selected', parseInt(btn.dataset.index) === state.fgColor);
     });
     
-    document.querySelectorAll('#bg-colors .color-btn').forEach(btn => {
+    document.querySelectorAll('#bg-colors .teletext-color-btn').forEach(btn => {
         btn.classList.toggle('selected', parseInt(btn.dataset.index) === state.bgColor);
     });
     
     // Actualizar botones móviles
     document.querySelectorAll('.color-btn-mobile').forEach(btn => {
         btn.classList.toggle('active', parseInt(btn.dataset.color) === state.fgColor);
+    });
+}
+
+function setupKareIcons() {
+    // Renderizar previsualización de iconos
+    Object.keys(KARE_ICONS).forEach(iconName => {
+        const preview = document.getElementById(`icon-${iconName}`);
+        if (!preview) return;
+        
+        const iconCanvas = document.createElement('canvas');
+        iconCanvas.width = 48;
+        iconCanvas.height = 48;
+        const iconCtx = iconCanvas.getContext('2d');
+        
+        // Fondo negro
+        iconCtx.fillStyle = '#000';
+        iconCtx.fillRect(0, 0, 48, 48);
+        
+        // Dibujar icono en amarillo Teletext
+        iconCtx.fillStyle = '#ffff00';
+        const iconData = KARE_ICONS[iconName];
+        const pixelSize = 3; // 48/16 = 3
+        
+        for (let y = 0; y < 16; y++) {
+            for (let x = 0; x < 16; x++) {
+                if (iconData[y][x] === 1) {
+                    iconCtx.fillRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
+                }
+            }
+        }
+        
+        preview.appendChild(iconCanvas);
+    });
+    
+    // Event listeners para iconos
+    document.querySelectorAll('.kare-icon-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const iconName = btn.dataset.icon;
+            drawKareIcon(iconName);
+        });
     });
 }
 
@@ -323,7 +479,7 @@ function setupEventListeners() {
     canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
     canvas.addEventListener('touchend', handleTouchEnd);
     
-    // Botones de herramientas
+    // Herramientas
     document.querySelectorAll('.tool-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const tool = btn.dataset.tool;
@@ -331,24 +487,19 @@ function setupEventListeners() {
         });
     });
     
-    // Botones de control
+    // Controles
     document.getElementById('btn-clear').addEventListener('click', clearCanvas);
     document.getElementById('btn-grid').addEventListener('click', toggleGrid);
     document.getElementById('btn-undo').addEventListener('click', undo);
     document.getElementById('btn-export').addEventListener('click', () => exportCanvas(false));
     
-    // Botones de presets
-    document.getElementById('btn-smiley').addEventListener('click', () => drawKareIcon('smiley'));
-    document.getElementById('btn-hand').addEventListener('click', () => drawKareIcon('hand'));
-    document.getElementById('btn-watch').addEventListener('click', () => drawKareIcon('watch'));
-    
-    // Botón responsive
+    // Responsive
     responsiveToggle.addEventListener('click', toggleResponsive);
     
     // Menú móvil
     mobileMenuBtn.addEventListener('click', toggleMobileMenu);
     
-    // Botones móviles
+    // Herramientas móviles
     document.querySelectorAll('.mobile-tool-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const tool = btn.dataset.tool;
@@ -357,12 +508,13 @@ function setupEventListeners() {
         });
     });
     
+    // Colores móviles
     document.querySelectorAll('.color-btn-mobile').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const colorIndex = parseInt(btn.dataset.color);
             state.fgColor = colorIndex;
             updatePaletteDisplay();
-            showMessage(`COLOR: ${state.colors[colorIndex].display}`);
+            showMessage(`■ COLOR: ${state.colors[colorIndex].display}`);
             e.stopPropagation();
         });
     });
@@ -370,7 +522,7 @@ function setupEventListeners() {
     // Atajos de teclado
     document.addEventListener('keydown', handleKeyPress);
     
-    // Actualizar posición del cursor
+    // Cursor
     canvas.addEventListener('mousemove', updateCursorPosition);
     
     // Cerrar modales
@@ -391,12 +543,12 @@ function setupMobileUI() {
     toolsList.innerHTML = '';
     
     const tools = [
-        { tool: 'brush', icon: '✏️', label: 'Pincel' },
-        { tool: 'eraser', icon: '🧹', label: 'Borrador' },
-        { tool: 'line', icon: '📏', label: 'Línea' },
-        { tool: 'rect', icon: '⬜', label: 'Rectángulo' },
-        { tool: 'circle', icon: '⭕', label: 'Círculo' },
-        { tool: 'fill', icon: '🎨', label: 'Relleno' }
+        { tool: 'brush', icon: '■', label: 'PINCEL' },
+        { tool: 'eraser', icon: '□', label: 'BORRAR' },
+        { tool: 'line', icon: '─', label: 'LÍNEA' },
+        { tool: 'rect', icon: '▢', label: 'RECT' },
+        { tool: 'circle', icon: '○', label: 'CÍRCULO' },
+        { tool: 'fill', icon: '▣', label: 'RELLENO' }
     ];
     
     tools.forEach(t => {
@@ -420,15 +572,16 @@ function setupMobileUI() {
         item.className = 'mobile-color-item';
         item.dataset.color = index;
         item.innerHTML = `
-            <div class="color-btn-mobile color-${color.name}" 
-                 style="width: 40px; height: 40px; margin-bottom: 5px;"></div>
+            <div class="teletext-color-btn color-${color.name}" 
+                 style="width: 36px; height: 36px; margin-bottom: 5px;"></div>
             <div>${color.display}</div>
+            <div style="font-size: 10px; color: #ff0;">${color.symbol}</div>
         `;
         item.addEventListener('click', () => {
             state.fgColor = index;
             updatePaletteDisplay();
             document.getElementById('mobile-colors-modal').style.display = 'none';
-            showMessage(`COLOR: ${color.display}`);
+            showMessage(`■ COLOR: ${color.display} (${color.symbol})`);
         });
         colorsList.appendChild(item);
     });
@@ -437,12 +590,11 @@ function setupMobileUI() {
 function setTool(tool) {
     state.tool = tool;
     
-    // Actualizar UI desktop
+    // Actualizar UI
     document.querySelectorAll('.tool-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.tool === tool);
     });
     
-    // Actualizar UI móvil
     document.querySelectorAll('.mobile-tool-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.tool === tool);
     });
@@ -459,9 +611,12 @@ function setTool(tool) {
     };
     canvas.style.cursor = cursorMap[tool] || 'crosshair';
     
-    showMessage(`HERRAMIENTA: ${tool.toUpperCase()}`);
+    showMessage(`■ HERRAMIENTA: ${tool.toUpperCase()}`);
 }
 
+// ===========================================
+// FUNCIONES DE DIBUJO
+// ===========================================
 function startDrawing(e) {
     e.preventDefault();
     const { x, y } = getGridCoordinates(e);
@@ -553,7 +708,6 @@ function handleTouchMove(e) {
         });
         canvas.dispatchEvent(mouseEvent);
         
-        // Detectar si es pan (movimiento grande sin dibujar)
         const dx = Math.abs(touch.clientX - state.touchStart.x);
         const dy = Math.abs(touch.clientY - state.touchStart.y);
         if (dx > 20 || dy > 20) {
@@ -831,7 +985,7 @@ function drawCircle(x1, y1, x2, y2) {
 }
 
 function drawGridCell(x, y) {
-    ctx.strokeStyle = 'rgba(128, 216, 255, 0.3)';
+    ctx.strokeStyle = '#00ffff';
     ctx.lineWidth = 1;
     
     ctx.strokeRect(
@@ -849,11 +1003,11 @@ function drawKareIcon(iconName) {
     if (!iconData) return;
     
     // Dibujar en el centro
-    const centerX = Math.floor(CONFIG.cols / 2) - 4;
-    const centerY = Math.floor(CONFIG.rows / 2) - 4;
+    const centerX = Math.floor(CONFIG.cols / 2) - 8;
+    const centerY = Math.floor(CONFIG.rows / 2) - 8;
     
-    for (let y = 0; y < 8; y++) {
-        for (let x = 0; x < 8; x++) {
+    for (let y = 0; y < 16; y++) {
+        for (let x = 0; x < 16; x++) {
             if (iconData[y][x] === 1) {
                 const px = centerX + x;
                 const py = centerY + y;
@@ -864,11 +1018,11 @@ function drawKareIcon(iconName) {
         }
     }
     
-    showMessage(`ICONO KARE "${iconName.toUpperCase()}" AÑADIDO`);
+    showMessage(`■ ICONO KARE: ${iconName.toUpperCase()} ■`);
 }
 
 function clearCanvas() {
-    if (confirm('¿BORRAR TODO EL LIENZO?')) {
+    if (confirm('■ ¿BORRAR TODO EL LIENZO? ■')) {
         ctx.fillStyle = state.colors[state.bgColor].hex;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
@@ -883,7 +1037,7 @@ function clearCanvas() {
             }
         }
         
-        showMessage('LIENZO BORRADO');
+        showMessage('■ LIENZO BORRADO ■');
         saveToHistory();
     }
 }
@@ -891,7 +1045,7 @@ function clearCanvas() {
 function toggleGrid() {
     state.showGrid = !state.showGrid;
     redrawAllPixels();
-    showMessage(`REJILLA: ${state.showGrid ? 'ACTIVADA' : 'DESACTIVADA'}`);
+    showMessage(`■ REJILLA: ${state.showGrid ? 'ON' : 'OFF'} ■`);
 }
 
 function undo() {
@@ -900,14 +1054,13 @@ function undo() {
         const previousState = state.history[state.historyIndex];
         state.gridData = JSON.parse(JSON.stringify(previousState.gridData));
         redrawAllPixels();
-        showMessage('DESHECHO');
+        showMessage('■ DESHECHO ■');
     } else {
-        showMessage('NO HAY MÁS ACCIONES PARA DESHACER');
+        showMessage('■ NO HAY ACCIONES PARA DESHACER ■');
     }
 }
 
 function saveToHistory() {
-    // Limitar historial a 50 estados
     if (state.history.length > 50) {
         state.history.shift();
     }
@@ -925,11 +1078,11 @@ function exportCanvas(includeGrid = true) {
     exportCanvas.height = CONFIG.rows * CONFIG.gridSize;
     const exportCtx = exportCanvas.getContext('2d');
     
-    // Dibujar fondo
+    // Fondo
     exportCtx.fillStyle = state.colors[state.bgColor].hex;
     exportCtx.fillRect(0, 0, exportCanvas.width, exportCanvas.height);
     
-    // Dibujar píxeles
+    // Píxeles
     for (let y = 0; y < CONFIG.rows; y++) {
         for (let x = 0; x < CONFIG.cols; x++) {
             const cell = state.gridData[y][x];
@@ -953,9 +1106,9 @@ function exportCanvas(includeGrid = true) {
         }
     }
     
-    // Dibujar rejilla si se incluye
+    // Rejilla
     if (includeGrid && state.showGrid) {
-        exportCtx.strokeStyle = 'rgba(128, 216, 255, 0.3)';
+        exportCtx.strokeStyle = '#00ffff';
         exportCtx.lineWidth = 1;
         
         for (let x = 0; x <= CONFIG.cols; x++) {
@@ -974,16 +1127,16 @@ function exportCanvas(includeGrid = true) {
     }
     
     const link = document.createElement('a');
-    link.download = `pixelcare-${new Date().getTime()}.png`;
+    link.download = `pixelkare-${new Date().getTime()}.png`;
     link.href = exportCanvas.toDataURL('image/png');
     link.click();
     
-    showMessage('IMAGEN EXPORTADA COMO PNG');
+    showMessage('■ IMAGEN EXPORTADA COMO PNG ■');
 }
 
 function updateCursorPosition(e) {
     const { x, y } = getGridCoordinates(e);
-    cursorPos.textContent = `X: ${x}, Y: ${y}`;
+    cursorPos.textContent = `X:${x.toString().padStart(2, '0')} Y:${y.toString().padStart(2, '0')}`;
 }
 
 function updateTime() {
@@ -997,7 +1150,7 @@ function updateTime() {
 }
 
 function updateDisplay() {
-    statusIndicator.textContent = state.isDrawing ? '● DIBUJANDO' : '● LISTO';
+    statusIndicator.textContent = state.isDrawing ? '● DRAW' : '● READY';
 }
 
 function showMessage(msg) {
@@ -1005,7 +1158,7 @@ function showMessage(msg) {
     
     setTimeout(() => {
         if (messageLine.textContent === msg) {
-            messageLine.textContent = 'PIXELCARE - HOMENAJE A SUSAN KARE. CREA ICONOS PIXEL ART.';
+            messageLine.textContent = 'PIXELKARE - TELETEXT PAINT ■ HOMENAJE A SUSAN KARE ■';
         }
     }, 3000);
 }
@@ -1025,12 +1178,12 @@ function handleKeyPress(e) {
         e.preventDefault();
     }
     
-    // Teclas numéricas para colores (1-8)
+    // Teclas 1-8 para colores Teletext
     const colorIndex = parseInt(e.key) - 1;
     if (colorIndex >= 0 && colorIndex <= 7) {
         state.fgColor = colorIndex;
         updatePaletteDisplay();
-        showMessage(`COLOR: ${state.colors[colorIndex].display}`);
+        showMessage(`■ COLOR: ${state.colors[colorIndex].display} (${state.colors[colorIndex].symbol})`);
     }
     
     // Ctrl+Z para deshacer
@@ -1044,23 +1197,40 @@ function handleKeyPress(e) {
         e.preventDefault();
         exportCanvas(false);
     }
+    
+    // Teclas de función
+    if (e.key === 'F1') {
+        showMessage('■ AYUDA: B=PINCEL E=BORRAR L=LÍNEA R=RECT C=CÍRCULO F=RELLENO 1-8=COLORES ■');
+    }
+    if (e.key === 'F2') {
+        // Función para guardar proyecto
+        showMessage('■ GUARDAR PROYECTO (PRÓXIMAMENTE) ■');
+    }
+    if (e.key === 'F4') {
+        exportCanvas(false);
+    }
+    if (e.key === 'F5') {
+        clearCanvas();
+    }
+    if (e.key === 'F6') {
+        toggleGrid();
+    }
 }
 
 function startBlinkEffect() {
     setInterval(() => {
         state.blinkState = !state.blinkState;
-        // Efecto de parpadeo en el indicador de estado
         if (state.blinkState) {
-            statusIndicator.style.opacity = '1';
+            statusIndicator.style.color = '#0ff';
         } else {
-            statusIndicator.style.opacity = '0.7';
+            statusIndicator.style.color = '#f0f';
         }
     }, CONFIG.blinkInterval);
 }
 
 function toggleResponsive() {
     if (CONFIG.isMobile) {
-        // Cambiar a modo desktop
+        // Cambiar a desktop
         CONFIG.isMobile = false;
         CONFIG.gridSize = 16;
         CONFIG.cols = 40;
@@ -1072,7 +1242,7 @@ function toggleResponsive() {
         toolsPanel.classList.remove('mobile-open');
         mobileMenuBtn.style.display = 'none';
     } else {
-        // Cambiar a modo móvil
+        // Cambiar a móvil
         CONFIG.isMobile = true;
         CONFIG.gridSize = 14;
         CONFIG.cols = 28;
@@ -1086,12 +1256,12 @@ function toggleResponsive() {
     
     resolutionIndicator.textContent = `${CONFIG.cols}×${CONFIG.rows}`;
     setupCanvas();
-    showMessage(`MODO: ${CONFIG.isMobile ? 'MÓVIL' : 'ESCRITORIO'}`);
+    showMessage(`■ MODO: ${CONFIG.isMobile ? 'MÓVIL' : 'ESCRITORIO'} ■`);
 }
 
 function toggleMobileMenu() {
     toolsPanel.classList.toggle('mobile-open');
 }
 
-// Iniciar la aplicación
+// Iniciar aplicación
 window.addEventListener('load', init);
