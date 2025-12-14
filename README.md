@@ -1,39 +1,41 @@
-# pixelcare
+# PixelCare 🎨
 
-Un editor gráfico pixel art con la estética del sistema Teletext/Viewdata de los años 80/90.
+Un editor de pixel art en homenaje a **Susan Kare**, la diseñadora de iconos originales del Apple Macintosh (1984).
 
-## 🚀 Características
+## ✨ Características
 
-- **Paleta Teletext auténtica**: 8 colores básicos (negro, rojo, verde, amarillo, azul, magenta, cian, blanco)
-- **Interfaz retro**: Diseño fiel a sistemas como Minitel, Ceefax, Prestel
-- **Herramientas de dibujo**: Pincel, borrador, líneas, rectángulos, círculos, relleno
-- **Sistema de bloques**: Resolución 40x25 bloques (como teletext real)
-- **Atajos de teclado**: Teclas F1-F7 para funciones rápidas
-- **Exportación**: Guarda tus creaciones como PNG o JSON
+- **Interfaz estilo Macintosh 1984** con colores retro
+- **Herramientas completas**: Pincel, borrador, líneas, rectángulos, círculos, relleno
+- **Paleta de 8 colores** inspirada en sistemas retro
+- **Iconos de Susan Kare**: Smiley, mano y reloj incluidos como presets
+- **Totalmente responsive**: Funciona en móvil y desktop
+- **Sistema de deshacer/rehacer**
+- **Exportación a PNG**
 
 ## 🎮 Controles
 
-### Herramientas (teclas rápidas):
+### Teclado:
 - **B**: Pincel
-- **E**: Borrador
+- **E**: Borrador  
 - **L**: Línea
 - **R**: Rectángulo
 - **C**: Círculo
 - **F**: Relleno
-- **T**: Texto
-- **S**: Seleccionar
+- **1-8**: Cambiar color frontal
+- **Ctrl+Z**: Deshacer
+- **Ctrl+S**: Exportar
 
-### Teclas de función:
-- **F1**: Ayuda
-- **F2**: Guardar proyecto (JSON)
-- **F3**: Cargar proyecto
-- **F4**: Exportar como PNG
-- **F5**: Borrar lienzo
-- **F6**: Modo parpadeo
-- **F7**: Ocultar/revelar
+### Móvil:
+- **Toque**: Dibujar
+- **Barra inferior**: Herramientas rápidas
+- **Menú hamburguesa**: Todas las herramientas
+- **Toque largo en color**: Cambiar color
 
-## 🛠️ Instalación
+## 🛠️ Tecnologías
 
-1. Clona el repositorio:
-```bash
-git clone https://github.com/tuusuario/teletext-paint.git
+- HTML5 Canvas
+- JavaScript Vanilla (sin dependencias)
+- CSS3 con diseño responsive
+- Pixel art puro
+
+## 📁 Estructura
