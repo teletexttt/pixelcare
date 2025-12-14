@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixelcare</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="assets/icon.png" type="image/png">
+</head>
+<body>
+    <div class="teletext-container">
+        <!-- Cabecera estilo teletext -->
+        <div class="header">
+            <div class="header-left">
+                <span class="page-indicator">Pág 100</span>
+                <span class="time-display" id="time-display">18:45</span>
+            </div>
+            <div class="header-center">
+                <h1>PIXELCARE v1.0</h1>
+            </div>
+            <div class="header-right">
+                <span class="status-indicator" id="status-indicator">● EN LÍNEA</span>
+            </div>
+        </div>
+        
+        <!-- Área principal -->
+        <div class="main-area">
+            <!-- Panel de lienzo -->
+            <div class="canvas-panel">
+                <div class="panel-header">
+                    <div class="panel-title">LIENZO TELETEXT</div>
+                    <div class="panel-info">
+                        <span id="cursor-pos">X: 0, Y: 0</span>
+                        <span id="tool-indicator">HERRAMIENTA: PINCEL</span>
+                    </div>
+                </div>
+                <div class="canvas-container">
+                    <canvas id="main-canvas" width="640" height="400"></canvas>
+                    <div class="grid-overlay" id="grid-overlay"></div>
+                </div>
+                <div class="canvas-controls">
+                    <button id="btn-clear" class="teletext-btn">BORRAR TODO</button>
+                    <button id="btn-grid" class="teletext-btn">REJILLA ON/OFF</button>
+                    <button id="btn-export" class="teletext-btn">EXPORTAR</button>
+                </div>
+            </div>
+            
+            <!-- Panel de herramientas -->
+            <div class="tools-panel">
+                <div class="panel-header">
+                    <div class="panel-title">HERRAMIENTAS</div>
+                </div>
+                <div class="tools-grid">
+                    <button class="tool-btn active" data-tool="brush">PINCEL (B)</button>
+                    <button class="tool-btn" data-tool="eraser">BORRADOR (E)</button>
+                    <button class="tool-btn" data-tool="line">LÍNEA (L)</button>
+                    <button class="tool-btn" data-tool="rect">RECTÁNGULO (R)</button>
+                    <button class="tool-btn" data-tool="circle">CÍRCULO (C)</button>
+                    <button class="tool-btn" data-tool="fill">RELLENO (F)</button>
+                    <button class="tool-btn" data-tool="text">TEXTO (T)</button>
+                    <button class="tool-btn" data-tool="select">SELECCIONAR (S)</button>
+                </div>
+                
+                <div class="panel-header">
+                    <div class="panel-title">PALETA TELETEXT</div>
+                </div>
+                <div class="palette-grid">
+                    <!-- Colores de frente -->
+                    <div class="palette-section">
+                        <div class="section-title">COLOR FRENTE</div>
+                        <div class="colors-grid" id="fg-colors">
+                            <!-- Generado por JS -->
+                        </div>
+                    </div>
+                    
+                    <!-- Colores de fondo -->
+                    <div class="palette-section">
+                        <div class="section-title">COLOR FONDO</div>
+                        <div class="colors-grid" id="bg-colors">
+                            <!-- Generado por JS -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="current-colors">
+                    <div class="color-display">
+                        <div class="color-label">ACTUAL:</div>
+                        <div class="color-box" id="current-fg"></div>
+                        <div class="color-box" id="current-bg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Panel inferior -->
+        <div class="footer">
+            <div class="shortcuts">
+                <span>F1:AYUDA</span>
+                <span>F2:GUARDAR</span>
+                <span>F3:CARGAR</span>
+                <span>F4:EXPORTAR PNG</span>
+                <span>F5:RESET</span>
+                <span>F6:MODO PARPADEO</span>
+                <span>F7:OCULTAR/REVELAR</span>
+            </div>
+            <div class="message-line" id="message-line">
+                BIENVENIDO A PIXELCARE. UTILICE LAS TECLAS O RATÓN.
+            </div>
+        </div>
+    </div>
+    
+    <!-- Overlay para texto -->
+    <div id="text-input-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <h3>INGRESAR TEXTO TELETEXT</h3>
+            <input type="text" id="text-input" maxlength="20" placeholder="Texto (max 20 chars)">
+            <div class="modal-buttons">
+                <button id="btn-text-ok">ACEPTAR</button>
+                <button id="btn-text-cancel">CANCELAR</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
