@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pixelkare</title>
+    <title>PixelCare - Teletext Paint en homenaje a Susan Kare</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="assets/icon.png" type="image/png">
     <meta name="description" content="Editor pixel art teletext en homenaje a Susan Kare">
@@ -18,13 +18,13 @@
     
     <div class="mobile-toolbar" id="mobile-toolbar">
         <div class="mobile-tools">
-            <button class="mobile-tool-btn" data-tool="brush">✏️</button>
-            <button class="mobile-tool-btn" data-tool="eraser">🧹</button>
-            <button class="mobile-tool-btn" data-tool="fill">🎨</button>
-            <button class="mobile-tool-btn active" data-tool="brush">⬜</button>
+            <button class="mobile-tool-btn active" data-tool="brush">B</button>
+            <button class="mobile-tool-btn" data-tool="eraser">E</button>
+            <button class="mobile-tool-btn" data-tool="fill">F</button>
+            <button class="mobile-tool-btn" data-tool="line">L</button>
         </div>
         <div class="mobile-colors">
-            <div class="color-btn-mobile color-white" data-color="7"></div>
+            <div class="color-btn-mobile color-white active" data-color="7"></div>
             <div class="color-btn-mobile color-red" data-color="1"></div>
             <div class="color-btn-mobile color-green" data-color="2"></div>
             <div class="color-btn-mobile color-blue" data-color="4"></div>
@@ -39,8 +39,10 @@
                 <span class="time-display" id="time-display">09:41</span>
             </div>
             <div class="header-center">
-                <h1>PIXELKARE v1.0</h1>
-                <div class="subtitle">En homenaje a Susan Kare</div>
+                <div class="logo-pixelkare">
+                    <canvas id="logo-canvas" class="logo-canvas" width="48" height="48"></canvas>
+                    <div class="logo-text">PIXELCARE<br><span class="logo-subtext">SUSAN KARE TRIBUTE</span></div>
+                </div>
             </div>
             <div class="header-right">
                 <span class="status-indicator" id="status-indicator">● PIXEL</span>
@@ -54,7 +56,7 @@
             <div class="canvas-panel">
                 <div class="panel-header">
                     <div class="panel-title">
-                        <span class="kare-icon">⌘</span> LIENZO PIXELKARE
+                        <span class="kare-icon">⌘</span> LIENZO PIXELCARE
                     </div>
                     <div class="panel-info">
                         <span id="cursor-pos">X: 0, Y: 0</span>
@@ -64,9 +66,6 @@
                 </div>
                 <div class="canvas-container">
                     <canvas id="main-canvas"></canvas>
-                    <div class="canvas-overlay">
-                        <div class="kare-quote">"Good design is good will" - Susan Kare</div>
-                    </div>
                 </div>
                 <div class="canvas-controls">
                     <button id="btn-clear" class="teletext-btn">⌫ BORRAR</button>
@@ -76,15 +75,15 @@
                 </div>
             </div>
             
-            <!-- Panel de herramientas (oculto en móvil) -->
+            <!-- Panel de herramientas -->
             <div class="tools-panel" id="tools-panel">
                 <div class="panel-header">
-                    <div class="panel-title">HERRAMIENTAS MACINTOSH</div>
+                    <div class="panel-title">HERRAMIENTAS</div>
                 </div>
                 
                 <div class="kare-bio">
                     <div class="bio-title">Susan Kare (1954)</div>
-                    <div class="bio-text">Diseñadora de iconos para Apple Macintosh (1984) y Microsoft Windows. Creó el smiley, la mano, el reloj y otros iconos icónicos.</div>
+                    <div class="bio-text">Diseñadora de iconos para Apple Macintosh (1984). Creó el smiley, la mano, el reloj y otros iconos icónicos del Mac original.</div>
                 </div>
                 
                 <div class="tools-grid">
@@ -112,31 +111,23 @@
                         <div class="tool-icon">🎨</div>
                         <div class="tool-label">Relleno (F)</div>
                     </button>
-                    <button class="tool-btn kare-tool" data-tool="text">
-                        <div class="tool-icon">🔤</div>
-                        <div class="tool-label">Texto (T)</div>
-                    </button>
-                    <button class="tool-btn kare-tool" data-tool="select">
-                        <div class="tool-icon">✋</div>
-                        <div class="tool-label">Mano (S)</div>
-                    </button>
                 </div>
                 
-                <!-- Paleta Kare (colores Macintosh original) -->
+                <!-- Paleta de colores -->
                 <div class="panel-header">
-                    <div class="panel-title">PALETA MACINTOSH 1-BIT</div>
+                    <div class="panel-title">PALETA MACINTOSH</div>
                 </div>
                 <div class="palette-grid">
                     <div class="palette-section">
                         <div class="section-title">COLOR FRENTE</div>
-                        <div class="colors-grid kare-palette" id="fg-colors">
+                        <div class="colors-grid" id="fg-colors">
                             <!-- Generado por JS -->
                         </div>
                     </div>
                     
                     <div class="palette-section">
                         <div class="section-title">COLOR FONDO</div>
-                        <div class="colors-grid kare-palette" id="bg-colors">
+                        <div class="colors-grid" id="bg-colors">
                             <!-- Generado por JS -->
                         </div>
                     </div>
@@ -146,8 +137,8 @@
                     <div class="color-display">
                         <div class="color-label">ACTUAL:</div>
                         <div class="color-preview">
-                            <div class="color-box kare-color-box" id="current-fg"></div>
-                            <div class="color-box kare-color-box" id="current-bg"></div>
+                            <div class="color-box" id="current-fg"></div>
+                            <div class="color-box" id="current-bg"></div>
                         </div>
                         <div class="color-names">
                             <span id="fg-color-name">Blanco</span> / 
@@ -157,9 +148,9 @@
                 </div>
                 
                 <div class="preset-buttons">
-                    <button class="preset-btn" data-preset="smiley">😊 Smiley</button>
-                    <button class="preset-btn" data-preset="mac">🍎 Mac</button>
-                    <button class="preset-btn" data-preset="hand">✋ Mano</button>
+                    <button class="preset-btn" id="btn-smiley">😊 Smiley</button>
+                    <button class="preset-btn" id="btn-hand">✋ Mano</button>
+                    <button class="preset-btn" id="btn-watch">⌚ Reloj</button>
                 </div>
             </div>
         </div>
@@ -167,30 +158,18 @@
         <!-- Panel inferior -->
         <div class="footer">
             <div class="shortcuts">
-                <span>⌘B: PINCEL</span>
-                <span>⌘E: BORRAR</span>
-                <span>⌘Z: DESHACER</span>
-                <span>⌘S: GUARDAR</span>
-                <span>⌘E: EXPORTAR</span>
-                <span>⌘G: REJILLA</span>
+                <span>B: PINCEL</span>
+                <span>E: BORRAR</span>
+                <span>L: LÍNEA</span>
+                <span>R: RECT</span>
+                <span>C: CÍRCULO</span>
+                <span>F: RELLENO</span>
             </div>
             <div class="message-line" id="message-line">
                 PIXELCARE - HOMENAJE A SUSAN KARE. CREA ICONOS PIXEL ART.
             </div>
             <div class="mobile-hint" id="mobile-hint">
-                👆 Toca para dibujar • 📱 Usa dos dedos para mover
-            </div>
-        </div>
-    </div>
-    
-    <!-- Modal para texto -->
-    <div id="text-input-overlay" class="modal-overlay">
-        <div class="modal-content">
-            <h3>✏️ TEXTO PIXELCARE</h3>
-            <input type="text" id="text-input" maxlength="20" placeholder="Escribe como Susan Kare...">
-            <div class="modal-buttons">
-                <button id="btn-text-ok" class="kare-btn">✅ ACEPTAR</button>
-                <button id="btn-text-cancel" class="kare-btn">❌ CANCELAR</button>
+                👆 Toca para dibujar • Pincha para cambiar color
             </div>
         </div>
     </div>
@@ -223,4 +202,4 @@
 
     <script src="script.js"></script>
 </body>
-</html>
+    </html>
