@@ -57,19 +57,20 @@
                 <div class="panel-header">
                     <div class="panel-title">
                         <span class="kare-icon">■</span> LIENZO TELETEXT
+                        <div class="canvas-info">
+                            <span class="info-item" id="resolution-display">40×25</span>
+                            <span class="info-item">8 COLORS</span>
+                            <span class="info-item">SUSAN KARE</span>
+                        </div>
                     </div>
                     <div class="panel-info">
                         <span id="cursor-pos">X:00 Y:00</span>
                         <span id="tool-indicator">PINCEL</span>
-                        <span id="resolution-indicator">40×25</span>
+                        <span id="color-indicator">█</span>
                     </div>
                 </div>
                 <div class="canvas-container">
                     <canvas id="main-canvas"></canvas>
-                    <div class="teletext-overlay">
-                        <div class="teletext-corner">TELETEXT</div>
-                        <div class="kare-quote">"Pixel by pixel" - Susan Kare</div>
-                    </div>
                 </div>
                 <div class="canvas-controls">
                     <button id="btn-clear" class="teletext-btn" title="Borrar todo">CLS</button>
