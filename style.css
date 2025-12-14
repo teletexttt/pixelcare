@@ -167,11 +167,33 @@ body {
     color: #f0f;
 }
 
+/* Información del canvas */
+.canvas-info {
+    display: flex;
+    gap: 8px;
+    margin-left: 15px;
+}
+
+.info-item {
+    background: #000;
+    color: #f0f;
+    padding: 2px 6px;
+    border: 1px solid #00f;
+    font-size: 11px;
+}
+
 .panel-info {
     display: flex;
     gap: 12px;
     font-size: 14px;
     flex-wrap: wrap;
+    align-items: center;
+}
+
+#color-indicator {
+    color: #fff;
+    font-size: 18px;
+    margin-left: 5px;
 }
 
 .canvas-container {
@@ -197,33 +219,6 @@ body {
     touch-action: none;
 }
 
-.teletext-overlay {
-    position: absolute;
-    pointer-events: none;
-}
-
-.teletext-corner {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    color: #0ff;
-    font-size: 10px;
-    background: #000;
-    padding: 2px 4px;
-    border: 1px solid #0ff;
-}
-
-.kare-quote {
-    position: absolute;
-    bottom: 5px;
-    left: 5px;
-    color: #f0f;
-    font-size: 10px;
-    background: #000;
-    padding: 2px 4px;
-    border: 1px solid #f0f;
-}
-
 .canvas-controls {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -236,6 +231,10 @@ body {
 @media (max-width: 480px) {
     .canvas-controls {
         grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .canvas-info {
+        display: none;
     }
 }
 
@@ -736,11 +735,6 @@ body {
 .color-magenta { background: #ff00ff; }
 .color-cyan { background: #00ffff; }
 .color-white { background: #ffffff; }
-
-/* Símbolos Teletext */
-.teletext-symbol {
-    font-family: 'VT323', monospace;
-}
 
 /* Scrollbar estilo Teletext */
 ::-webkit-scrollbar {
